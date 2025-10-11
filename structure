@@ -1,0 +1,53 @@
+vehicle_rental_system/
+│
+├── src/                    # Source code (.cpp files)
+│   ├── main.cpp            # Entry point
+│   ├── system/             # Core system logic
+│   │   ├── App.cpp         # App controller (main loop, menus)
+│   │   ├── Database.cpp    # File handling or mock database
+│   │   └── Utils.cpp       # Helper functions (input validation, formatting, etc.)
+│   │
+│   ├── models/             # Data structures (OOP classes)
+│   │   ├── User.cpp
+│   │   ├── Vehicle.cpp
+│   │   ├── Rental.cpp
+│   │   └── Wallet.cpp
+│   │
+│   ├── services/           # Business logic (feature modules)
+│   │   ├── AuthService.cpp     # Login / Signup / Logout
+│   │   ├── VehicleService.cpp  # Vehicle browsing, viewing
+│   │   ├── RentalService.cpp   # Renting, returning
+│   │   ├── ProfileService.cpp  # Profile view/update
+│   │   └── WalletService.cpp   # Top-up management
+│   │
+│   └── ui/                 # User interface / menus
+│       ├── Menu.cpp
+│       ├── ProfileMenu.cpp
+│       ├── VehicleMenu.cpp
+│       └── RentalMenu.cpp
+│
+├── include/                # Header files (.h)
+│   ├── App.h
+│   ├── Database.h
+│   ├── User.h
+│   ├── Vehicle.h
+│   ├── Rental.h
+│   ├── Wallet.h
+│   ├── AuthService.h
+│   ├── VehicleService.h
+│   ├── RentalService.h
+│   ├── ProfileService.h
+│   ├── WalletService.h
+│   ├── Menu.h
+│   ├── Utils.h
+│   └── constants.h
+│
+├── data/                   # Flat-file "database"
+│   ├── users.txt
+│   ├── vehicles.txt
+│   ├── rentals.txt
+│   └── balance.txt
+│
+├── build/                  # Compiled binaries or object files
+│
+└── README.md

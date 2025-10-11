@@ -1,73 +1,44 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-using namespace std;
+#include "../../include/Customer.h"
 
-class Customer {
-private:
-    int customerID;
-    string firstName;
-    string lastName;
-    string userName;
-    string password;
-    string licenseNumber;
-    string contactNumber;
-    string emailAddress;
-    vector<string> rentedVehicleIDs; 
-    double balance;
+Customer::Customer(int id, string fName, string lName, string uName, string pass, string license, string contact, string email, double bal, vector<int> rentedList) {
+    customerID = id;
+    firstName = fName;
+    lastName = lName;
+    userName = uName;
+    password = pass;
+    licenseNumber = license;
+    contactNumber = contact;
+    emailAddress = email;
+    balance = bal;
+    rentedVehicleIDs = rentedList;
+}
 
-public:
-    // ✅ Display basic info
-    void displayInfo() {
-        cout << "----------------------------------------\n";
-        cout << "Customer ID: " << customerID << endl;
-        cout << "Name: " << firstName << " " << lastName << endl;
-        cout << "Username: " << userName << endl;
-        cout << "Email: " << emailAddress << endl;
-        cout << "Contact: " << contactNumber << endl;
-        cout << "License: " << licenseNumber << endl;
-        cout << "Balance: ₱" << balance << endl;
-        cout << "Rented Vehicles: ";
-        if (rentedVehicleIDs.empty()) cout << "None";
-        else {
-            for (const auto& id : rentedVehicleIDs)
-                cout << id << " ";
-        }
-        cout << "\n----------------------------------------\n";
-    }
+// Getters
+int Customer::getCustomerID() { return customerID; }
+string Customer::getFirstName() { return firstName; }
+string Customer::getLastName() { return lastName; }
+string Customer::getUserName() { return userName; }
+string Customer::getPassword() { return password; }
+string Customer::getLicenseNumber() { return licenseNumber; }
+string Customer::getContactNumber() { return contactNumber; }
+string Customer::getEmailAddress() { return emailAddress; }
+double Customer::getBalance() { return balance; }
+vector<int> Customer::getRentedVehicles() { return rentedVehicleIDs; }
 
-    // ✅ Getters
-    int getCustomerID() { return customerID; }
-    string getFirstName() { return firstName; }
-    string getLastName() { return lastName; }
-    string getUserName() { return userName; }
-    string getPassword() { return password; }
-    string getLicenseNumber() { return licenseNumber; }
-    string getContactNumber() { return contactNumber; }
-    string getEmailAddress() { return emailAddress; }
-    double getBalance() { return balance; }
-    vector<string> getRentedVehicles() { return rentedVehicleIDs; }
+// Setters
+void Customer::setCustomerID(int newCustomerID) { customerID = newCustomerID; }
+void Customer::setFirstName(string newFirstName) { firstName = newFirstName; }
+void Customer::setLastName(string newLastName) { lastName = newLastName; }
+void Customer::setUserName(string username) { userName = username; }
+void Customer::setPassword(string newPassword) { password = newPassword; }
+void Customer::setLicenseNumber(string license) { licenseNumber = license; }
+void Customer::setContactNumber(string newNumber) { contactNumber = newNumber; }
+void Customer::setEmailAddress(string email) { emailAddress = email; }
+void Customer::setBalance(double newBalance) { balance = newBalance; }
+void Customer::setRentedVehicles(vector<int> rentedList) { rentedVehicleIDs = rentedList; }
 
-    // ✅ Setters
-    void setFirstName(string newFirstName) { firstName = newFirstName; }
-    void setLastName(string newLastName) { lastName = newLastName; }
-    void setUserName(string username) { userName = username; }
-    void setPassword(string newPassword) { password = newPassword; }
-    void setLicenseNumber(string license) { licenseNumber = license; }
-    void setContactNumber(string newNumber) { contactNumber = newNumber; }
-    void setEmailAddress(string email) { emailAddress = email; }
-    void setBalance(double newBalance) { balance = newBalance; }
-    void setRentedVehicles(vector<string> rentedList) { rentedVehicleIDs = rentedList; }
+// Rented vehicle management
+void Customer::addRentedVehicle(int vehicleID) {
+    rentedVehicleIDs.push_back(vehicleID);
+}
 
-    // ✅ Rented vehicle management
-    void addRentedVehicle(string vehicleID) {
-        rentedVehicleIDs.push_back(vehicleID);
-    }
-
-    void removeRentedVehicle(string vehicleID) {
-        auto it = find(rentedVehicleIDs.begin(), rentedVehicleIDs.end(), vehicleID);
-        if (it != rentedVehicleIDs.end())
-            rentedVehicleIDs.erase(it);
-    }
-};

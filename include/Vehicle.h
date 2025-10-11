@@ -1,7 +1,9 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
+#include <iostream>
 #include <string>
+
 using namespace std;
 
 class Vehicle {
@@ -10,7 +12,7 @@ private:
     string vehicleBrand;
     string vehicleModel;
     string vehiclePlateNumber;
-    double rentalPrice;
+    double dailyRate;
     bool vehicleAvailability;
     double rating;
     double mileage;
@@ -18,7 +20,8 @@ private:
 
 public:
     // Constructor
-    Vehicle(int id, string brand, string model, string plate, double price,
+    Vehicle();
+    Vehicle(int id, string brand, string model, string plate, double rate,
             bool available, double rating, double mileage, string fuelType);
 
     // Display info
@@ -26,19 +29,25 @@ public:
 
     // Getters
     int getVehicleID();
-    double getRentalPrice();
-    bool getVehicleAvailability();
+    string getVehiclePlateNumber();
+    string getVehicleBrand();
+    string getVehicleModel();
+    string getFuelType();
+    double getDailyRate();
+    bool getVehicleAvailability(); // check if it is rented or not
     double getMileage();
+    double getRating();
 
     // Setters
     void setVehiclePlateNumber(string plateNumber);
     void setVehicleBrand(string brand);
     void setVehicleModel(string model);
-    void setRentalPrice(double price);
+    void setDailyRate(double dRate);
     void setVehicleAvailability(bool status);
     void setRating(double rating);
     void setMileage(double mileage);
     void setFuelType(string fuelType);
+    
 };
 
 #endif

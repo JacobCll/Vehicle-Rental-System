@@ -1,64 +1,50 @@
-#include <iostream>
-#include <string>
-using namespace std;
+#include "../../include/Rental.h"
 
-class Rental {
-private:
-    int rentalID;
-    int customerID;
-    int vehicleID;
-    string startDate;
-    string endDate;
-    double totalCost;
-    bool isActive;
+Rental::Rental(int id, int cus, int veh, string startD, string endD, double dailyRate) {
+    rentalID = id;
+    customerID = cus;
+    vehicleID = veh;
+    startDate = startD;
+    endDate = endD;
+    numberOfDays = daysBetween();
+    totalCost = numberOfDays * dailyRate;
+}
 
-public:
-    // ✅ Default constructor
-    Rental()
-        : rentalID(0), customerID(0), vehicleID(0),
-          startDate("N/A"), endDate("N/A"),
-          totalCost(0.0), isActive(false) {}
-
-    // ✅ Parameterized constructor
-    Rental(int rID, int cID, int vID, string start, string end,
-           double cost, bool active)
-        : rentalID(rID), customerID(cID), vehicleID(vID),
-          startDate(start), endDate(end),
-          totalCost(cost), isActive(active) {}
-
-    // ✅ Display info
-    void displayInfo() {
-        cout << "----------------------------------------\n";
-        cout << "Rental ID: " << rentalID << endl;
-        cout << "Customer ID: " << customerID << endl;
-        cout << "Vehicle ID: " << vehicleID << endl;
-        cout << "Start Date: " << startDate << endl;
-        cout << "End Date: " << endDate << endl;
-        cout << "Total Cost: ₱" << totalCost << endl;
-        cout << "Status: " << (isActive ? "Active" : "Ended") << endl;
-        cout << "----------------------------------------\n";
+// Convert string date to tm struct
+// calculate days between two dates
+tm Rental::stringToTm(const string& dateStr) {
+    tm tm = {};
+    int year, month, day;
+    if (sscanf(dateStr.c_str(), "%d-%d-%d", &year, &month, &day) == 3) {
+        tm.tm_year = year - 1900; // tm_year is years since 1900
+        tm.tm_mon = month - 1;    // tm_mon is 0-based
+        tm.tm_mday = day;
+        tm.tm_hour = 0;            
+        tm.tm_min = 0;
+        tm.tm_sec = 0;
     }
+    return tm;
+}
+int Rental::daysBetween() {
+    tm tmStart = stringToTm(startDate);
+    tm tmEnd = stringToTm(endDate);
+    time_t timeStart = mktime(&tmStart);
+    time_t timeEnd = mktime(&tmEnd);
+    const int secondsPerDay = 60 * 60 * 24;
+    return static_cast<int>(difftime(timeEnd, timeStart) / secondsPerDay) + 1;
+}
+ 
+// Getters
+int Rental::getRentalID() { return rentalID; }
+int Rental::getCustomerID() { return customerID; }
+int Rental::getVehicleID() { return vehicleID; }
+string Rental::getStartDate() { return startDate; }
+string Rental::getEndDate() { return endDate; }
+double Rental::getTotalCost() { return totalCost; }
 
-    // ✅ Calculation
-    double calculateTotal(double rate, int days) {
-        totalCost = rate * days;
-        return totalCost;
-    }
-
-    // ✅ Getters
-    int getRentalID() { return rentalID; }
-    int getCustomerID() { return customerID; }
-    int getVehicleID() { return vehicleID; }
-    double getTotalCost() { return totalCost; }
-
-    // ✅ Setters
-    void setIsActive(bool active) { isActive = active; }
-    void setStartDate(string start) { startDate = start; }
-    void setEndDate(string end) { endDate = end; }
-
-    // ✅ End rental
-    void endRental(string end) {
-        endDate = end;
-        isActive = false;
-    }
-};
+// Setters
+void Rental::setRentalID(int id) { rentalID = id; }
+void Rental::setCustomerID(int id) { customerID = id; }
+void Rental::setVehicleID(int id) { vehicleID = id; }
+void Rental::setStartDate(string& start) { startDate = start; }
+void Rental::setEndDate(string& end) { endDate = end; }

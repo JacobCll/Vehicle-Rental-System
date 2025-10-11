@@ -1,27 +1,57 @@
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
 
+#include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Customer {
 private:
-    string username;
+    int customerID;
+    string firstName;
+    string lastName;
+    string userName;
     string password;
+    string licenseNumber;
+    string contactNumber;
+    string emailAddress;
+    vector<int> rentedVehicleIDs;
     double balance;
 
 public:
-    Customer(string u = "", string p = "", double b = 0.0)
-        : username(u), password(p), balance(b) {}
+    // Constructors
+    Customer()
+        : customerID(0), firstName(""), lastName(""), userName(""), password(""),
+          licenseNumber(""), contactNumber(""), emailAddress(""), balance(0.0) {};
+    Customer(int id, string fName, string lName, string uName, string pass, string license, string contact, string email, double bal = 0.0, vector<int> rentedList = {});
 
-    string getUsername() const { return username; }
-    string getPassword() const { return password; }
-    double getBalance() const { return balance; }
+    // Getters
+    int getCustomerID();
+    string getFirstName();
+    string getLastName();
+    string getUserName();
+    string getPassword();
+    string getLicenseNumber();
+    string getContactNumber();
+    string getEmailAddress();
+    double getBalance();
+    vector<int> getRentedVehicles();
 
-    void setPassword(string p) { password = p; }
-    void setBalance(double b) { balance = b; }
+    // Setters
+    void setCustomerID(int newCustomerID);
+    void setFirstName(string newFirstName);
+    void setLastName(string newLastName);
+    void setUserName(string username);
+    void setPassword(string newPassword);
+    void setLicenseNumber(string license);
+    void setContactNumber(string newNumber);
+    void setEmailAddress(string email);
+    void setBalance(double newBalance);
+    void setRentedVehicles(vector<int> rentedList);
 
-    void displayProfile() const;
+    // Rented vehicle management
+    void addRentedVehicle(int vehicleID);
 };
 
-#endif
+#endif // CUSTOMER_H

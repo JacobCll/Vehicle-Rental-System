@@ -2,6 +2,9 @@
 #define RENTAL_H
 
 #include <string>
+#include <iostream>
+#include <ctime>
+
 using namespace std;
 
 class Rental {
@@ -9,31 +12,34 @@ private:
     int rentalID;
     int customerID;
     int vehicleID;
-    string startDate;
-    string endDate;
+    string startDate; // YYYY-MM-DD
+    string endDate;   // YYYY-MM-DD
     double totalCost;
-    bool isActive;
+    int numberOfDays;
+
+    // Helper functions
+    tm stringToTm(const string& dateStr);
+    int daysBetween();
 
 public:
-    // Constructor
-    Rental(int rID, int cID, int vID, string startDate);
-
-    // Methods
-    void displayInfo();
-    double calculateTotal(double rate, int days);
-    void endRental(string endDate, double rate, int days);
+    // Constructors
+    Rental();
+    Rental(int rentalID, int customerID, int vehicleID, string startD, string endD, double dailyRate);
 
     // Getters
     int getRentalID();
-    int getVehicleID();
     int getCustomerID();
+    int getVehicleID();
+    string getStartDate();
+    string getEndDate();
     double getTotalCost();
-    bool getIsActive();
 
     // Setters
-    void setIsActive(bool active);
-    void setStartDate(string s);
-    void setEndDate(string e);
+    void setRentalID(int id);
+    void setCustomerID(int id);
+    void setVehicleID(int id);
+    void setStartDate(string& s);
+    void setEndDate(string& e);
 };
 
 #endif

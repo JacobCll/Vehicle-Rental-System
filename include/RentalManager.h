@@ -1,22 +1,35 @@
 #ifndef RENTAL_MANAGER_H
 #define RENTAL_MANAGER_H
 
-#include <vector>
-#include <string>
+#include "VehicleManager.h"
 #include "Rental.h"
 #include "Vehicle.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <sstream>
+
 using namespace std;
 
 class RentalManager {
 private:
+    const string rentalFile = "rentals.txt"; // file to store rentals
+    string rentalIDFile = "rentalID.txt"; // file to store last rental ID
     vector<Rental> rentals;
-    int nextRentalID = 1;
+    VehicleManager& vehicleManager; // Reference to VehicleManager for vehicle operations
+    
+    void loadRentals();
+    void saveRentals();
 
 public:
-    void createRental(int customerID, int vehicleID, string startDate, double rate, int days, vector<Vehicle>& vehicles);
-    void endRental(int rentalID, string endDate, vector<Vehicle>& vehicles);
+    RentalManager(VehicleManager& vm);
+
+    void createRental(int customerID, int vehicleID, string startDate, string endDate);
+    void endRental(int rentalID);
     void listAllRentals();
     void listRentalsByCustomer(int customerID);
+    void getRentalByID(int rentalID);
 };
 
 #endif

@@ -1,67 +1,51 @@
-#include <iostream>
-#include <string>
-using namespace std;
+#include "../../include/Vehicle.h"
 
-class Vehicle {
-private:
-    int vehicleID;
-    string vehicleBrand;
-    string vehicleModel;
-    string vehiclePlateNumber;
-    double rentalPrice;
-    bool vehicleAvailability;
-    double rating;
-    double mileage;
-    string fuelType;
 
-public:
-    // ✅ Default constructor
-    Vehicle()
-        : vehicleID(0), vehicleBrand("Unknown"), vehicleModel("Unknown"),
-          vehiclePlateNumber("N/A"), rentalPrice(0.0), vehicleAvailability(true),
-          rating(0.0), mileage(0.0), fuelType("Unspecified") {}
+// Parameterized constructor
+Vehicle::Vehicle(int id, string brand, string model, string plate, double rate, bool available, double r, double m, string fuel) {
+    vehicleID = id;
+    vehicleBrand = brand;
+    vehicleModel = model;
+    vehiclePlateNumber = plate;
+    dailyRate = rate;
+    vehicleAvailability = available;
+    rating = r;
+    mileage = m;
+    fuelType = fuel;
+}
 
-    // ✅ Parameterized constructor
-    Vehicle(int id, string brand, string model, string plate, double price,
-            bool availability, double rate, double miles, string fuel)
-        : vehicleID(id), vehicleBrand(brand), vehicleModel(model),
-          vehiclePlateNumber(plate), rentalPrice(price),
-          vehicleAvailability(availability), rating(rate),
-          mileage(miles), fuelType(fuel) {}
+// Display vehicle information
+void Vehicle::displayInfo() {
+    cout << "----------------------------------------\n";
+    cout << "Vehicle ID: " << vehicleID << endl;
+    cout << "Brand: " << vehicleBrand << endl;
+    cout << "Model: " << vehicleModel << endl;
+    cout << "Plate Number: " << vehiclePlateNumber << endl;
+    cout << "Fuel Type: " << fuelType << endl;
+    cout << "Mileage: " << mileage << " km" << endl;
+    cout << "Daily Rate: ₱" << dailyRate << endl;
+    cout << "Rating: " << rating << "/5" << endl;
+    cout << "Availability: " << (vehicleAvailability ? "Available" : "Not Available") << endl;
+    cout << "----------------------------------------\n";
+}
 
-    // ✅ Display vehicle information
-    void displayInfo() {
-        cout << "----------------------------------------\n";
-        cout << "Vehicle ID: " << vehicleID << endl;
-        cout << "Brand: " << vehicleBrand << endl;
-        cout << "Model: " << vehicleModel << endl;
-        cout << "Plate Number: " << vehiclePlateNumber << endl;
-        cout << "Fuel Type: " << fuelType << endl;
-        cout << "Mileage: " << mileage << " km" << endl;
-        cout << "Rental Price: ₱" << rentalPrice << endl;
-        cout << "Rating: " << rating << "/5" << endl;
-        cout << "Availability: " << (vehicleAvailability ? "Available" : "Not Available") << endl;
-        cout << "----------------------------------------\n";
-    }
+// Getters
+int Vehicle::getVehicleID() { return vehicleID; }
+string Vehicle::getVehiclePlateNumber() { return vehiclePlateNumber; }
+string Vehicle::getVehicleBrand() { return vehicleBrand; }
+string Vehicle::getVehicleModel() { return vehicleModel; }
+string Vehicle::getFuelType() { return fuelType; }
+double Vehicle::getDailyRate() { return dailyRate; }
+bool Vehicle::getVehicleAvailability() { return vehicleAvailability; }
+double Vehicle::getMileage() { return mileage; }
+double Vehicle::getRating() { return rating; }
 
-    // ✅ Getters
-    int getVehicleID() { return vehicleID; }
-    string getVehicleBrand() { return vehicleBrand; }
-    string getVehicleModel() { return vehicleModel; }
-    string getVehiclePlateNumber() { return vehiclePlateNumber; }
-    double getRentalPrice() { return rentalPrice; }
-    bool getVehicleAvailability() { return vehicleAvailability; }
-    double getRating() { return rating; }
-    double getMileage() { return mileage; }
-    string getFuelType() { return fuelType; }
-
-    // ✅ Setters
-    void setVehiclePlateNumber(string plateNumber) { vehiclePlateNumber = plateNumber; }
-    void setVehicleBrand(string brand) { vehicleBrand = brand; }
-    void setVehicleModel(string model) { vehicleModel = model; }
-    void setRentalPrice(double price) { rentalPrice = price; }
-    void setVehicleAvailability(bool status) { vehicleAvailability = status; }
-    void setRating(double r) { rating = r; }
-    void setMileage(double m) { mileage = m; }
-    void setFuelType(string fType) { fuelType = fType; }
-};
+// Setters
+void Vehicle::setVehiclePlateNumber(string plateNumber) { vehiclePlateNumber = plateNumber; }
+void Vehicle::setVehicleBrand(string brand) { vehicleBrand = brand; }
+void Vehicle::setVehicleModel(string model) { vehicleModel = model; }
+void Vehicle::setDailyRate(double dRate) { dailyRate = dRate; }
+void Vehicle::setVehicleAvailability(bool status) { vehicleAvailability = status; }
+void Vehicle::setRating(double r) { rating = r; }
+void Vehicle::setMileage(double m) { mileage = m; }
+void Vehicle::setFuelType(string fType) { fuelType = fType; }

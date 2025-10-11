@@ -1,8 +1,4 @@
-#include "CustomerManager.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-using namespace std;
+#include "../../include/CustomerManager.h"
 
 // load customers on initialization
 CustomerManager::CustomerManager() {
@@ -20,7 +16,6 @@ void CustomerManager::loadCustomers() {
         if (line.empty()) continue;
         stringstream ss(line);
 
-        Customer c;
         int id;
         string firstName, lastName, username, password, license, contact, email;
         double balance;
@@ -29,29 +24,18 @@ void CustomerManager::loadCustomers() {
         ss >> id >> firstName >> lastName >> username >> password
            >> license >> contact >> email >> balance;
 
-        vector<string> rentedIDs;
+        vector<int> rentedIDs;
         while (ss >> rentedStr)
-            rentedIDs.push_back(rentedStr);
-
-        // ✅ You should have a setter for ID instead of the pointer hack
-        // Assuming you add: void setCustomerID(int id) { customerID = id; }
-        c.setCustomerID(id);
-        c.setFirstName(firstName);
-        c.setLastName(lastName);
-        c.setUserName(username);
-        c.setPassword(password);
-        c.setLicenseNumber(license);
-        c.setContactNumber(contact);
-        c.setEmailAddress(email);
-        c.setBalance(balance);
-        c.setRentedVehicles(rentedIDs);
-
+            rentedIDs.push_back(stoi(rentedStr));
+        
+        Customer c(id, firstName, lastName, username, password, license, contact, email, balance, rentedIDs);
+        
+        // add to customers vector
         customers.push_back(c);
     }
 
     inFile.close();
 }
-
 // save customers to file
 void CustomerManager::saveCustomers() {
     ofstream outFile(customerFile);
@@ -73,21 +57,37 @@ void CustomerManager::saveCustomers() {
     outFile.close();
 }
 
+// generate a new unique customer ID
 int CustomerManager::generateNewCustomerID() {
-    if (customers.empty()) return 1;
-    return customers.back().getCustomerID() + 1;
+    ifstream inFile(customerIDFile);
+    int lastID = 0;
+
+    if (inFile.is_open()) { // file exists
+        inFile >> lastID; // read last ID
+        inFile.close(); // close file
+    }
+
+    int newID = lastID + 1; // increment ID
+
+    // Save the new ID back to the file
+    ofstream outFile(customerIDFile);
+    if (outFile.is_open()) {
+        outFile << newID;
+        outFile.close();
+    }
+
+    return newID;
 }
 
+
 bool CustomerManager::signup() {
-    // creates a new customer object
-    Customer newC;
     string firstName, lastName, username, password, license, contact, email;
 
     cout << "\n========== SIGN UP ==========\n";
     cout << "Enter Email Address: ";
     cin >> email;
     // Check for duplicate email
-    for (const Customer& c : customers) {
+    for (Customer& c : customers) {
         if (c.getEmailAddress() == email) {
             cout << "❌ Email already taken. Please try again.\n";
             return false;
@@ -106,27 +106,19 @@ bool CustomerManager::signup() {
     cout << "Choose Password: ";
     cin >> password;
 
-    // Assign collected info
-    newC.setEmailAddress(email);
-    newC.setUserName(username);
-    newC.setFirstName(firstName);
-    newC.setLastName(lastName);
-    newC.setLicenseNumber(license);
-    newC.setContactNumber(contact);
-    newC.setPassword(password);
-
-    // set default values
-    newC.setBalance(0.0);
-    newC.setCustomerID(generateNewCustomerID());
+    
+    int newID = generateNewCustomerID();
+    
+    // creates a new customer object
+    Customer newC(newID, firstName, lastName, username, password, license, contact, email);
 
     // push new customer to customers vector
     customers.push_back(newC);
+    
     // save latest customers
     saveCustomers();
     return true;
 }
-
-
 bool CustomerManager::login() {
     string email, password;
 
@@ -139,7 +131,7 @@ bool CustomerManager::login() {
     // iterate through customers and find a match
     for (Customer& c : customers) {
         if (c.getEmailAddress() == email && c.getPassword() == password) {
-            cout << "Login successfull" << endl;
+            cout << "Login successful" << endl;
             currentCustomer = c;
             return true;
         } 

@@ -103,6 +103,16 @@ int CustomerManager::loadLastLoggedIn() {
     return lastID;
 }
 
+//checks if username input is valid
+bool isValidUsername(const string& username) {
+    for (char c : username) {
+        if (!(isalnum(c) || c == '_')) {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool CustomerManager::signup() {
     string firstName, lastName, username, password, license, contact, email;
 
@@ -117,9 +127,20 @@ bool CustomerManager::signup() {
             return false;
         }
     }
-    cout << "Enter Username: "; cin >> username;
-    cout << "Enter First Name: "; cin >> firstName;
-    cout << "Enter Last Name: "; cin >> lastName;
+
+    //fix signup issue --- spaces for username is not allowed --- first and last name spaces are allowed --- 
+    cin.ignore(); // clear newline from input buffer
+    while (true) {//checks if username input is valid
+        cout << "Enter Username: "; getline(cin, username);
+        if (isValidUsername(username)) {
+            break;
+        } else {
+            cout << "Invalid username. Letters, numbers, and underscores only with no spaces.\n";
+        }
+    }
+
+    cout << "Enter First Name: "; getline(cin, firstName);
+    cout << "Enter Last Name: "; getline(cin, lastName);
     cout << "Enter License Number: "; cin >> license;
     cout << "Enter Contact Number: "; cin >> contact;
     cout << "Choose Password: "; cin >> password;

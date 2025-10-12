@@ -26,12 +26,15 @@ void MainMenu::run() {
 bool MainMenu::handleInput() {
     string choice;
     cin >> choice;
+    cin.ignore();
     
     if (customerManager.getCurrentUser() == nullptr) {
         handleLoggedOutInput(choice);
     } else {
         handleLoggedInInput(choice);
     }
+
+    return true;
 }
 
 void MainMenu::handleLoggedOutInput(string& choice) {

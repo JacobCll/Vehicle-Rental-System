@@ -3,6 +3,13 @@
 // load customers on initialization
 CustomerManager::CustomerManager() {
     loadCustomers();
+    // load last logged-in customer ID
+    int lastID = loadLastLoggedIn();
+    if (lastID != 0) {
+        currentCustomer = getCustomerByID(lastID); // set last logged in user as current
+    } else {
+        currentCustomer = nullptr;
+    }
 }
 
 // load customers from file
@@ -56,7 +63,6 @@ void CustomerManager::saveCustomers() {
     }
     outFile.close();
 }
-
 // generate a new unique customer ID
 int CustomerManager::generateNewCustomerID() {
     ifstream inFile(customerIDFile);
@@ -78,51 +84,58 @@ int CustomerManager::generateNewCustomerID() {
 
     return newID;
 }
-
+// save the current logged-in customer's ID to file
+void CustomerManager::saveLastLoggedIn() {
+    ofstream outFile(lastLoggedInFile);
+    if(outFile.is_open()) {
+        outFile << currentCustomer->getCustomerID();
+        outFile.close();
+    }
+}
+// load the last logged-in customer ID from file
+int CustomerManager::loadLastLoggedIn() {
+    ifstream inFile(lastLoggedInFile);
+    int lastID = 0;
+    if(inFile.is_open()) {
+        inFile >> lastID;
+        inFile.close();
+    }
+    return lastID;
+}
 
 bool CustomerManager::signup() {
     string firstName, lastName, username, password, license, contact, email;
 
-    cout << "\n========== SIGN UP ==========\n";
+    system("cls");
+    cout << "========== SIGN UP ==========\n";
     cout << "Enter Email Address: ";
     cin >> email;
     // Check for duplicate email
     for (Customer& c : customers) {
         if (c.getEmailAddress() == email) {
-            cout << "❌ Email already taken. Please try again.\n";
+            cout << "Email already taken. Please try again.\n";
             return false;
         }
     }
-    cout << "Choose Username: ";
-    cin >> username;
-    cout << "Enter First Name: ";
-    cin >> firstName;
-    cout << "Enter Last Name: ";
-    cin >> lastName;
-    cout << "Enter License Number: ";
-    cin >> license;
-    cout << "Enter Contact Number: ";
-    cin >> contact;
-    cout << "Choose Password: ";
-    cin >> password;
+    cout << "Enter Username: "; cin >> username;
+    cout << "Enter First Name: "; cin >> firstName;
+    cout << "Enter Last Name: "; cin >> lastName;
+    cout << "Enter License Number: "; cin >> license;
+    cout << "Enter Contact Number: "; cin >> contact;
+    cout << "Choose Password: "; cin >> password;
 
-    
     int newID = generateNewCustomerID();
+    Customer newC(newID, firstName, lastName, username, password, license, contact, email); // creates a new customer object
+    customers.push_back(newC); // push new customer to customers vector
     
-    // creates a new customer object
-    Customer newC(newID, firstName, lastName, username, password, license, contact, email);
-
-    // push new customer to customers vector
-    customers.push_back(newC);
-    
-    // save latest customers
     saveCustomers();
     return true;
 }
 bool CustomerManager::login() {
     string email, password;
 
-    cout << "\n===== LOGIN =====\n";
+    system("cls");
+    cout << "===== LOGIN =====\n";
     cout << "Enter email: ";
     cin >> email;
     cout << "Enter password: ";
@@ -131,11 +144,29 @@ bool CustomerManager::login() {
     // iterate through customers and find a match
     for (Customer& c : customers) {
         if (c.getEmailAddress() == email && c.getPassword() == password) {
-            cout << "Login successful" << endl;
-            currentCustomer = c;
+            currentCustomer = &c;
+            saveLastLoggedIn();
             return true;
         } 
     }
 
     return false;
+}
+bool CustomerManager::logout() {
+    currentCustomer = nullptr;
+    ofstream outFile(lastLoggedInFile);
+    if(outFile.is_open()) {
+        outFile << 0; // reset last logged-in ID
+        outFile.close();
+    }
+    return true;
+}
+
+
+Customer* CustomerManager::getCustomerByID(int customerID) {
+    auto it = find_if(customers.begin(), customers.end(), [customerID](Customer& c) { return c.getCustomerID() == customerID; });
+    if (it != customers.end()) {
+        return &(*it);
+    }
+    return nullptr;
 }

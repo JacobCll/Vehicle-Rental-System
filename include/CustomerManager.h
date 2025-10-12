@@ -15,26 +15,27 @@ class CustomerManager {
 private:
     const string customerFile = "../data/customers.txt";
     string customerIDFile = "../data/customerID.txt";
+    string lastLoggedInFile = "../data/lastLoggedIn.txt";
     vector<Customer> customers;
-    Customer currentCustomer;
+    Customer* currentCustomer = nullptr;
 
-    // helper functions
     void loadCustomers();
-    // save customers to file
     void saveCustomers();
-    // generate next customer ID from file
     int generateNewCustomerID();
-
+    void saveLastLoggedIn();
+    int loadLastLoggedIn();
+ 
 public:
     // constructor to load customers from file
     CustomerManager(); 
 
     vector<Customer>& getAllCustomers() { return customers; }
-    Customer* getCurrentUser() {return &currentCustomer; }
+    Customer* getCurrentUser() {return currentCustomer; }
     Customer* getCustomerByID(int customerID);
 
     bool signup();
     bool login();
+    bool logout();
 };
 
 #endif

@@ -14,8 +14,8 @@ using namespace std;
 
 class RentalManager {
 private:
-    const string rentalFile = "rentals.txt"; // file to store rentals
-    string rentalIDFile = "rentalID.txt"; // file to store last rental ID
+    const string rentalFile = "../data/rentals.txt"; // file to store rentals
+    string rentalIDFile = "../data/rentalID.txt"; // file to store last rental ID
     vector<Rental> rentals;
     VehicleManager& vehicleManager; // Reference to VehicleManager for vehicle operations
     

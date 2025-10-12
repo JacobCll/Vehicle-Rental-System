@@ -12,8 +12,8 @@ using namespace std;
 
 class VehicleManager {
 private:
-    const string vehicleFile = "vehicles.txt";
-    string vehicleIDFile = "vehicleID.txt";
+    const string vehicleFile = "../data/vehicles.txt";
+    string vehicleIDFile = "../data/vehicleID.txt";
     vector<Vehicle> vehicles;
 
     void loadVehicles();

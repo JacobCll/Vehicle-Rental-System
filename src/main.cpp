@@ -1,48 +1,27 @@
+#include "../include/InterfaceManager.h"
 #include "../include/CustomerManager.h"
+#include "../include/MainMenu.h"
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 int main() {
+    InterfaceManager interfaceManager;
     CustomerManager customerManager;
+    MainMenu mainMenu(interfaceManager, customerManager);
 
-    while (true) {
-        system("cls");
-        cout << "==============================\n";
-        cout << "   VEHICLE RENTAL SYSTEM\n";
-        cout << "==============================\n";
-        cout << "[1] Login\n";
-        cout << "[2] Sign Up\n";
-        cout << "[3] Exit\n";
-        cout << "Choose an option: ";
-
-        string choice;
-        cin >> choice;
-        
-        if (choice == "1") {
-            if (customerManager.login()) {
-                cout << "✅ Login successful!\n";
-                system("pause");
+    // while the current interface is not EXIT, display the appropriate menu
+    while (interfaceManager.getCurrentInterface() != EXIT) {
+        switch (interfaceManager.getCurrentInterface()) {
+            case MAIN_MENU:
+                mainMenu.run();
                 break;
-            } else {
-                cout << "❌ Login failed. Please try again.\n";
-                system("pause");
-            }
-        } else if (choice == "2") {
-            if (customerManager.signup()) {
-                cout << "✅ Sign up successful! You can now log in.\n";
-            } else {
-                cout << "❌ Sign up failed. Please try again.\n";
-            }
-            system("pause");
-        } else if (choice == "3") {
-            cout << "Exiting the system. Goodbye!\n";
-            break;
-        } else {
-            cout << "Invalid option. Please try again.\n";
-            system("pause");
-        }
-
+            default:
+                interfaceManager.setInterface(EXIT);
+                break;
+        }   
     }
+
+    cout << "Exiting the system. Goodbye!\n";
+    return 0;
 }

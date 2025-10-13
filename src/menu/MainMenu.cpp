@@ -1,9 +1,10 @@
 #include "../../include/MainMenu.h"
+#include "../../include/Utils.h"
 
 MainMenu::MainMenu(InterfaceManager& im, CustomerManager& cm) : interfaceManager(im), customerManager(cm) {};
 
 void MainMenu::run() {
-    system("cls");
+    clearScreen();
     cout << "==============================\n";
     cout << "   VEHICLE RENTAL SYSTEM\n";
     cout << "==============================\n";

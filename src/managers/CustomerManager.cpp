@@ -1,4 +1,5 @@
 #include "../../include/CustomerManager.h"
+#include "../../include/Utils.h"
 
 // load customers on initialization
 CustomerManager::CustomerManager() {
@@ -116,7 +117,7 @@ bool isValidUsername(const string& username) {
 bool CustomerManager::signup() {
     string firstName, lastName, username, password, license, contact, email;
 
-    system("cls");
+    clearScreen();
     cout << "========== SIGN UP ==========\n";
     cout << "Enter Email Address: ";
     cin >> email;
@@ -155,7 +156,7 @@ bool CustomerManager::signup() {
 bool CustomerManager::login() {
     string email, password;
 
-    system("cls");
+    clearScreen();
     cout << "===== LOGIN =====\n";
     cout << "Enter email: ";
     cin >> email;

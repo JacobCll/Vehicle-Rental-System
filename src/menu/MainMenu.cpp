@@ -1,9 +1,10 @@
 #include "../../include/MainMenu.h"
+#include "../../include/Utils.h"
 
 MainMenu::MainMenu(InterfaceManager& im, CustomerManager& cm) : interfaceManager(im), customerManager(cm) {};
 
 void MainMenu::run() {
-    system("cls");
+    clearScreen();
     cout << "==============================\n";
     cout << "   VEHICLE RENTAL SYSTEM\n";
     cout << "==============================\n";
@@ -45,40 +46,40 @@ void MainMenu::handleLoggedOutInput(string& choice) {
         } else {
             cout << "Login failed. Please try again.\n";
         }
-        system("pause");
+        pauseScreen();
     } else if (choice == "2") {
         if (customerManager.signup()) {
             cout << "Sign up successful!\n";
         } else {
             cout << "Sign up failed. Please try again.\n";
         }
-        system("pause");
+        pauseScreen();
     } else if (choice == "3") {
         interfaceManager.setInterface(EXIT);
     } else {
         cout << "Invalid option. Please try again.\n";
-        system("pause");
+        pauseScreen();
     }
 }
 
 void MainMenu::handleLoggedInInput(string& choice) {
     if (choice == "1") {
         cout << "Browsing vehicles...\n";
-        system("pause");
+        pauseScreen();
     } else if (choice == "2") {
         cout << "Viewing profile...\n";
-        system("pause");
+        pauseScreen();
     } else if (choice == "3") {
         if (customerManager.logout()) {
             cout << "Logged out successfully.\n";
         } else {
             cout << "Logout failed. Please try again.\n";
         }
-        system("pause");
+        pauseScreen();
     } else if (choice == "4") {
         interfaceManager.setInterface(EXIT);
     } else {
         cout << "Invalid option. Please try again.\n";
-        system("pause");
+        pauseScreen();
     }
 }

@@ -1,6 +1,7 @@
 #include "../include/InterfaceManager.h"
 #include "../include/CustomerManager.h"
 #include "../include/MainMenu.h"
+#include "../include/Utils.h"
 #include <iostream>
 #include <string>
 using namespace std;

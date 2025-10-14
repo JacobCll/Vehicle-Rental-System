@@ -10,8 +10,7 @@
         "${workspaceFolder}/src/models/*.cpp",
         "${workspaceFolder}/src/menu/*.cpp",
         "${workspaceFolder}/src/managers/*.cpp",
-        "${workspaceFolder}/src/system/*.cpp",
-        "${workspaceFolder}/src/ui/*.cpp",
+        "${workspaceFolder}/src/utils/*.cpp",
         "-o",
         "${workspaceFolder}/build/vehicle_rental_system.exe"
       ],

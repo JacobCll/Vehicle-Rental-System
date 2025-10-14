@@ -4,6 +4,7 @@
 enum InterfaceType {
     MAIN_MENU,
     VEHICLE_MENU,
+    PROFILE_MENU,
     EXIT,
 };
 

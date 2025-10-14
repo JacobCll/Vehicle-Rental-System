@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <limits>
+#include <cstdlib>
 using namespace std;
 
 void clearScreen();

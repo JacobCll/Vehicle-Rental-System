@@ -3,8 +3,10 @@
 
 #include "CustomerManager.h"
 #include "InterfaceManager.h"
+#include "Utils.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class MainMenu {
@@ -14,11 +16,11 @@ private:
 
     void handleLoggedInInput(string& choice);
     void handleLoggedOutInput(string& choice);
-    bool handleInput();       // get and process user input
+    void handleInput();      
 public:
-    MainMenu(InterfaceManager& im, CustomerManager& cm); // constructor
-    void run();                 // show the menu
-                // process user choice
+    MainMenu(InterfaceManager& im, CustomerManager& cm); 
+    
+    void run();                 
 };
 
 #endif

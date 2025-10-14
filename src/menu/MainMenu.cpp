@@ -1,7 +1,7 @@
 #include "../../include/MainMenu.h"
-#include "../../include/Utils.h"
 
-MainMenu::MainMenu(InterfaceManager& im, CustomerManager& cm) : interfaceManager(im), customerManager(cm) {};
+MainMenu::MainMenu(InterfaceManager& im, CustomerManager& cm) 
+    : interfaceManager(im), customerManager(cm) {}
 
 void MainMenu::run() {
     clearScreen();
@@ -24,7 +24,7 @@ void MainMenu::run() {
     handleInput();
 }
 
-bool MainMenu::handleInput() {
+void MainMenu::handleInput() {
     string choice;
     cin >> choice;
     cin.ignore();
@@ -34,8 +34,6 @@ bool MainMenu::handleInput() {
     } else {
         handleLoggedInInput(choice);
     }
-
-    return true;
 }
 
 void MainMenu::handleLoggedOutInput(string& choice) {
@@ -67,8 +65,7 @@ void MainMenu::handleLoggedInInput(string& choice) {
         cout << "Browsing vehicles...\n";
         pauseScreen();
     } else if (choice == "2") {
-        cout << "Viewing profile...\n";
-        pauseScreen();
+        interfaceManager.setInterface(PROFILE_MENU);
     } else if (choice == "3") {
         if (customerManager.logout()) {
             cout << "Logged out successfully.\n";

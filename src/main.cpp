@@ -25,9 +25,10 @@ int main() {
                 profileMenu.run();
                 break;
             }
-            default:
+            default: {
                 interfaceManager.setInterface(EXIT);
                 break;
+            }
         }   
     }
 

@@ -1,3 +1,6 @@
-1 jacob carbonell jacob carbonara123 123213123123 099831313 jacob@gmail.com 0
-2 john doe john johndoe 123456789 0981029313 john@gmail.com 0
-3 Inigo Agunod inigohash inigo123321 123456 09695800894 inigoagunod457@gmail.com 0
+1,jacob,carbonell,jacob,carbonara123,12345,099831313,jacob@gmail.com,0
+2,john,doe,john,johndoe,123456789,0981029313,john@gmail.com,0
+3,Inigo,Agunod,inigohash,inigo123321,123456,09695800894,inigoagunod457@gmail.com,0
+5,Jacob the third,Carbonell,JacobCll123,carbonara123,1234567890,091837162731,jacob2@gmail.com,0
+6,asdasd,asdasdas,123123,12345,asdsadasd,adasdasdsad,j@gmail.com,0
+10,,,a,a,a,a,a,0

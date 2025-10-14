@@ -40,7 +40,6 @@ void MainMenu::handleLoggedOutInput(string& choice) {
     if (choice == "1") {
         if (customerManager.login()) {
             cout << "Login successful!\n";
-            cout << "Welcome, " << customerManager.getCurrentUser()->getFirstName() << "!\n";
         } else {
             cout << "Login failed. Please try again.\n";
         }

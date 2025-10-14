@@ -20,7 +20,6 @@ private:
     Customer* currentCustomer = nullptr;
 
     void loadCustomers();
-    void saveCustomers();
     int generateNewCustomerID();
     void saveLastLoggedIn();
     int loadLastLoggedIn();
@@ -32,6 +31,7 @@ public:
     vector<Customer>& getAllCustomers() { return customers; }
     Customer* getCurrentUser() {return currentCustomer; }
     Customer* getCustomerByID(int customerID);
+    void saveCustomers();
 
     bool signup();
     bool login();

@@ -1,4 +1,6 @@
 #include "../../include/MainMenu.h"
+#include "../../include/Utils.h"
+#include "../../include/VehicleMenu.h"
 
 MainMenu::MainMenu(InterfaceManager& im, CustomerManager& cm) 
     : interfaceManager(im), customerManager(cm) {}
@@ -61,8 +63,9 @@ void MainMenu::handleLoggedOutInput(string& choice) {
 
 void MainMenu::handleLoggedInInput(string& choice) {
     if (choice == "1") {
-        cout << "Browsing vehicles...\n";
-        pauseScreen();
+        VehicleMenu vehicleMenu;
+        vehicleMenu.run();
+        clearScreen();
     } else if (choice == "2") {
         interfaceManager.setInterface(PROFILE_MENU);
     } else if (choice == "3") {

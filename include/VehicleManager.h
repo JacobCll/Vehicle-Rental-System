@@ -29,6 +29,16 @@ public:
     vector<Vehicle> getAllVehicles();
 
     void listAllVehicles();
+
+    //Filtering and searching
+    vector<Vehicle> filterByAvailability(bool available);
+    vector<Vehicle> filterByBrand(const string& brand);
+    vector<Vehicle> filterByModel(const string& model);
+    vector<Vehicle> filterByFuelType(const string& fuel);
+    vector<Vehicle> filterByCarType(const string& type);
+    vector<Vehicle> filterByRating(double minRating);
+    vector<Vehicle> sortByPrice(bool ascending);
+    vector<Vehicle> sortByMileage(bool ascending);
 };
 
 #endif

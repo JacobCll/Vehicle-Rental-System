@@ -3,6 +3,8 @@
 #include "../include/MainMenu.h"
 #include "../include/ProfileMenu.h"
 #include "../include/Utils.h"
+#include "../include/VehicleMenu.h"
+#include "../include/VehicleManager.h"
 #include <iostream>
 #include <string>
 using namespace std;

@@ -63,9 +63,7 @@ void MainMenu::handleLoggedOutInput(string& choice) {
 
 void MainMenu::handleLoggedInInput(string& choice) {
     if (choice == "1") {
-        VehicleMenu vehicleMenu;
-        vehicleMenu.run();
-        clearScreen();
+        interfaceManager.setInterface(VEHICLE_MENU);
     } else if (choice == "2") {
         interfaceManager.setInterface(PROFILE_MENU);
     } else if (choice == "3") {

@@ -12,7 +12,7 @@ using namespace std;
 int main() {
     InterfaceManager interfaceManager;
     CustomerManager customerManager;
-    // create menu instances
+    VehicleMenu vehicleMenu(interfaceManager);
     MainMenu mainMenu(interfaceManager, customerManager);
     ProfileMenu profileMenu(interfaceManager, customerManager);
 
@@ -25,6 +25,11 @@ int main() {
             }
             case PROFILE_MENU: {
                 profileMenu.run();
+                break;
+            }
+
+            case VEHICLE_MENU: {
+                vehicleMenu.run();
                 break;
             }
             default: {

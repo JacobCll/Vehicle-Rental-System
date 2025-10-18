@@ -11,7 +11,10 @@ VehicleManager::VehicleManager() {
 // Load vehicles from file
 void VehicleManager::loadVehicles() {
     ifstream inFile(vehicleFile);
-    if (!inFile) return;
+    if (!inFile) {
+        cerr << "Error: Could not open vehicle file.\n";
+        return;
+    }
 
     vehicles.clear();
     string line;
@@ -19,18 +22,37 @@ void VehicleManager::loadVehicles() {
     // iterate through each line of the file
     while (getline(inFile, line)) {
         if (line.empty()) continue;
+
         stringstream ss(line);
+        vector<string> tokens;
+        string token;
 
-        int id;
-        string brand, model, plate, fuel, type;
-        double rate, r, m;
-        bool available;
+        //split the line by commas
+        while (getline(ss,token, ',')) {
+            tokens.push_back(token);
+        }
 
-        ss >> id >> brand >> model >> plate >> rate >> available >> r >> m >> fuel >> type;
+        if (token.size() != 10) {
+            cerr << "Invalid line format: " << line << endl;
+            continue;
+        }
+
+        //Declare and assign
+        int id = stoi(tokens[0]);
+        string brand = tokens[1];
+        string model = tokens[2];
+        string plate = tokens[3];
+        double rate = stod(tokens[4]);
+        bool available = stoi(tokens[5]);
+        double rating = stod(tokens[6]);
+        double mileage = stod(tokens[7]);
+        string fuel = tokens[8];
+        string type = tokens[9];
+
+        //ss >> id >> brand >> model >> plate >> rate >> available >> r >> m >> fuel >> type;
 
         // create vehicle object
-        Vehicle v(id, brand, model, plate, rate, available, r, m, fuel, type);
-
+        Vehicle v(id, brand, model, plate, rate, available, rating , mileage, fuel, type);
         vehicles.push_back(v);
     }
 

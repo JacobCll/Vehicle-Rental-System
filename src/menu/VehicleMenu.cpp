@@ -1,3 +1,4 @@
+#include "../../include/InterfaceManager.h"
 #include "../../include/VehicleMenu.h"
 #include "../../include/VehicleManager.h"
 #include "../../include/Utils.h"
@@ -39,6 +40,7 @@ void VehicleMenu::run() {
                 break;
             }
             case 2:
+                interfaceManager.setInterface(MAIN_MENU);
                 return; // back to main menu
             default:
                 cout << "Invalid option. Try again.\n";

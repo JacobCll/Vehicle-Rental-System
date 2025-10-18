@@ -3,6 +3,7 @@
 #include "../include/MainMenu.h"
 #include "../include/ProfileMenu.h"
 #include "../include/Utils.h"
+#include "../include/AdminMenu.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -13,6 +14,7 @@ int main() {
     // create menu instances
     MainMenu mainMenu(interfaceManager, customerManager);
     ProfileMenu profileMenu(interfaceManager, customerManager);
+    AdminMenu adminMenu(interfaceManager, customerManager);
 
     // while the current interface is not EXIT, display the appropriate menu
     while (interfaceManager.getCurrentInterface() != EXIT) {
@@ -23,6 +25,10 @@ int main() {
             }
             case PROFILE_MENU: {
                 profileMenu.run();
+                break;
+            }
+            case ADMIN_MENU: {
+                adminMenu.run();
                 break;
             }
             default: {

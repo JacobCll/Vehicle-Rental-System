@@ -12,6 +12,23 @@ CustomerManager::CustomerManager() {
         currentCustomer = nullptr;
     }
 }
+// if email in admins.txt file, set isAdmin to true
+bool CustomerManager::checkIsAdmin() {
+    ifstream inFile(adminsFile);
+    if (!inFile) return false;
+
+    string email;
+    while (getline(inFile, email)) {
+        if (currentCustomer && currentCustomer->getEmailAddress() == email) {
+            isAdmin = true;
+            inFile.close();
+            return true;
+        }
+    }
+    inFile.close();
+    isAdmin = false;
+    return false;
+}
 
 // load customers from file
 void CustomerManager::loadCustomers() {

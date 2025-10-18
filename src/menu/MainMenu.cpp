@@ -1,7 +1,10 @@
 #include "../../include/MainMenu.h"
 
-MainMenu::MainMenu(InterfaceManager& im, CustomerManager& cm) 
-    : interfaceManager(im), customerManager(cm) {}
+MainMenu::MainMenu(InterfaceManager& im, CustomerManager& cm) : interfaceManager(im), customerManager(cm) {
+    if (customerManager.checkIsAdmin()) {
+        interfaceManager.setInterface(ADMIN_MENU);
+    }
+}
 
 void MainMenu::run() {
     clearScreen();
@@ -14,10 +17,14 @@ void MainMenu::run() {
         cout << "[3] Exit\n";
     } else {
         cout << "Welcome, " << customerManager.getCurrentUser()->getFirstName() << "!\n";
+        if (customerManager.checkIsAdmin()) {
+            interfaceManager.setInterface(ADMIN_MENU);
+            return;
+        }
         cout << "[1] Browse Vehicles\n";
         cout << "[2] View Profile\n";
         cout << "[3] Logout\n";
-        cout << "[4] Exit\n";
+        cout << "[4] Exit\n";   
     }
     cout << "Choose an option: ";
 
@@ -28,11 +35,13 @@ void MainMenu::handleInput() {
     string choice;
     cin >> choice;
     cin.ignore();
-    
-    if (customerManager.getCurrentUser() == nullptr) {
-        handleLoggedOutInput(choice);
-    } else {
-        handleLoggedInInput(choice);
+
+    if (!customerManager.checkIsAdmin()) {
+        if (customerManager.getCurrentUser() == nullptr) {
+            handleLoggedOutInput(choice);
+        } else {
+            handleLoggedInInput(choice);
+        }
     }
 }
 

@@ -11,6 +11,7 @@ using namespace std;
 
 class MainMenu {
 private:
+    // add vehicle manager here later
     InterfaceManager& interfaceManager;
     CustomerManager& customerManager;
 

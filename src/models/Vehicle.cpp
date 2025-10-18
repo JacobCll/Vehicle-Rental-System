@@ -2,7 +2,7 @@
 
 
 // Parameterized constructor
-Vehicle::Vehicle(int id, string brand, string model, string plate, double rate, bool available, double r, double m, string fuel) {
+Vehicle::Vehicle(int id, string brand, string model, string plate, double rate, bool available, double r, double m, string fuel, string type) {
     vehicleID = id;
     vehicleBrand = brand;
     vehicleModel = model;
@@ -12,6 +12,7 @@ Vehicle::Vehicle(int id, string brand, string model, string plate, double rate, 
     rating = r;
     mileage = m;
     fuelType = fuel;
+    carType = type; // new field initialization
 }
 
 // Display vehicle information
@@ -22,6 +23,7 @@ void Vehicle::displayInfo() {
     cout << "Model: " << vehicleModel << endl;
     cout << "Plate Number: " << vehiclePlateNumber << endl;
     cout << "Fuel Type: " << fuelType << endl;
+    cout << "Car Type: " << carType << endl; // display car type
     cout << "Mileage: " << mileage << " km" << endl;
     cout << "Daily Rate: ₱" << dailyRate << endl;
     cout << "Rating: " << rating << "/5" << endl;
@@ -39,6 +41,7 @@ double Vehicle::getDailyRate() { return dailyRate; }
 bool Vehicle::getVehicleAvailability() { return vehicleAvailability; }
 double Vehicle::getMileage() { return mileage; }
 double Vehicle::getRating() { return rating; }
+string Vehicle::getCarType() { return carType; } // new getter for car type
 
 // Setters
 void Vehicle::setVehiclePlateNumber(string plateNumber) { vehiclePlateNumber = plateNumber; }
@@ -49,3 +52,4 @@ void Vehicle::setVehicleAvailability(bool status) { vehicleAvailability = status
 void Vehicle::setRating(double r) { rating = r; }
 void Vehicle::setMileage(double m) { mileage = m; }
 void Vehicle::setFuelType(string fType) { fuelType = fType; }
+void Vehicle::setCarType(string type) { carType = type; } // new setter for car type

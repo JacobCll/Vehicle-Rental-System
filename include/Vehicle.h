@@ -17,12 +17,13 @@ private:
     double rating;
     double mileage;
     string fuelType;
+    string carType; // new field for car type (e.g., SUV, Sedan, etc.)
 
 public:
     // Constructor
     Vehicle();
     Vehicle(int id, string brand, string model, string plate, double rate,
-            bool available, double rating, double mileage, string fuelType);
+            bool available, double rating, double mileage, string fuelType, string carType);
 
     // Display info
     void displayInfo();
@@ -33,6 +34,7 @@ public:
     string getVehicleBrand();
     string getVehicleModel();
     string getFuelType();
+    string getCarType(); // new getter for car type
     double getDailyRate();
     bool getVehicleAvailability(); // check if it is rented or not
     double getMileage();
@@ -47,6 +49,8 @@ public:
     void setRating(double rating);
     void setMileage(double mileage);
     void setFuelType(string fuelType);
+    void setCarType(string type); // new setter for car type
+    
     
 };
 
